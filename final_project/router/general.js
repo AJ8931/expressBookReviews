@@ -24,7 +24,7 @@ public_users.post("/register", (req, res) => {
 
 // Get the book list available in the shop
 public_users.get('/', function (req, res) {
-  return res.status(200).json(books);
+  return res.status(200).send(JSON.stringify(books));
 });
 
 // Get book details based on ISBN
@@ -40,7 +40,8 @@ public_users.get('/isbn/:isbn', function (req, res) {
 // Get book details based on author
 public_users.get('/author/:author', function (req, res) {
   let author = req.params.author;
-  let filterByAuthor = Object.values(books).filter((book) => (book.author.toLowerCase() === author.toLowerCase()))
+  let filterByAuthor = Object.values(books).filter((book) => 
+  (book.author.toLowerCase() === author.toLowerCase()))
   if (filterByAuthor.length > 0) {
     return res.status(200).json(filterByAuthor);
   }
