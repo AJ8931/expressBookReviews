@@ -22,6 +22,16 @@ public_users.post("/register", (req, res) => {
   }
 });
 
+function getAllBooks() {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(books);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 // Get the book list available in the shop
 public_users.get('/', function (req, res) {
   getAllBooks()
@@ -135,14 +145,5 @@ public_users.get('/review/:isbn', function (req, res) {
   return res.status(404).json({ message: "No Book By this ISBN" });
 });
 
-function getAllBooks() {
-  return new Promise((resolve, reject) => {
-    try {
-      resolve(books);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
 
 module.exports.general = public_users;
